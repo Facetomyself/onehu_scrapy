@@ -63,11 +63,6 @@ class OnehuSpider(scrapy.Spider):
         # Backward-compatible hook for Scrapy < 2.13.
         yield from self._iter_start_requests()
 
-    async def start(self):
-        # New hook for Scrapy >= 2.13 (async).
-        for request in self._iter_start_requests():
-            yield request
-
     def parse_archives(self, response: scrapy.http.Response):
         hrefs = response.css("div.list-group a.list-group-item::attr(href)").getall()
         if not hrefs:
